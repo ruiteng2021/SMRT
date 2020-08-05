@@ -131,7 +131,7 @@ import { StyleSheet, View } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
 
 export default function App () {
-  option = {
+  const option = {
     xAxis: {
       type: "category",
       data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
