@@ -83,21 +83,24 @@ export default class StockScreen extends Component {
    /*
    return (
     <View style={styles.container}>
-      <Table borderStyle={{borderWidth: 2, borderColor: '#c8e1ff'}}>
+      <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
         <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
+      </Table>
+
+      <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
         <Rows data={state.data} textStyle={styles.text}/>
       </Table>
     </View>
   )
-    */
+   */ 
 
    
     return (
       <View style={styles.container}>
-        <ScrollView horizontal={true}>
+        
           <View>
             <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-              <Row data={state.tableHead} widthArr={state.widthArr} style={styles.header} textStyle={styles.text}/>
+              <Row data={state.tableHead} style={styles.header} textStyle={styles.text}/>
             </Table>
             <ScrollView style={styles.dataWrapper}>
               <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
@@ -106,7 +109,7 @@ export default class StockScreen extends Component {
                     <Row
                       key={index}
                       data={rowData}
-                      widthArr={state.widthArr}
+                      //widthArr={state.widthArr}
                       style={[styles.row, index%2 && {backgroundColor: '#F7F6E7'}]}
                       textStyle={styles.text}
                     />
@@ -115,7 +118,7 @@ export default class StockScreen extends Component {
               </Table>
             </ScrollView>
           </View>
-        </ScrollView>
+        
       </View>
     )
     

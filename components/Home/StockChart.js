@@ -19,10 +19,10 @@ const StockChart = ({ data, name }) => {
     stockData.map((item) =>    
       values.push([item["open"], item["close"], item["low"], item["high"]])
     );
-    //console.log(values);
+    console.log(values);
   }
 
-  option = {
+  const option = {
 
     title: {
       show: true,
