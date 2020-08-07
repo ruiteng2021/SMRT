@@ -80,9 +80,9 @@ export default class StockScreen extends Component {
 }
  
 const styles = StyleSheet.create({
-  container: { flex: 1, margin: 0, padding: 0, paddingTop: 30, backgroundColor: '#fff' },
+  container: { flex: 1, margin: 0, padding: 0, paddingTop: 20, backgroundColor: '#fff' },
   header: { height: 50, backgroundColor: '#537791' },
   text: { textAlign: 'center', fontWeight: '100' },
   dataWrapper: { marginTop: -1 },
-  row: { height: 40, backgroundColor: '#E7E6E1' }
+  row: { height: 40, backgroundColor: '#E7E6E1' },
 });
