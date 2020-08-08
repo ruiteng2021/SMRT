@@ -8,7 +8,7 @@ import * as SQLite from 'expo-sqlite';
 
 
 import bgImage from '../../assets/background.jpg';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logoT.png';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const { width: WIDTH } = Dimensions.get('window');
