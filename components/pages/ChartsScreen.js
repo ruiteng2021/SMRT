@@ -62,10 +62,7 @@ export default function ChartsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 30,
-  },
+  container: { flex: 1,  margin: 0, padding: 0, paddingTop: 20 },
   separator: {
     height: StyleSheet.hairlineWidth,
     backgroundColor: "white",
