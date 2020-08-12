@@ -20,6 +20,7 @@ export default class StockScreen extends Component {
   componentDidMount() {
     console.log("componentDidMount");
     const self = this;
+
     // read data from datebase
     db.transaction(tx => 
       {
@@ -48,24 +49,27 @@ export default class StockScreen extends Component {
     )
   }
 
-  _alertIndex(data,index) {
-    console.log(index + 1);
-    console.log(data);
+  _alertIndex(code,index) {
+    let chart = this.props.navigation;
+    //console.log(index + 1);
+    //console.log(code);
+    // send code to Charts screen
+    chart.navigate('Charts', {data:code});    
   }
 
   componentWillUnmount(){console.log("componentWillUnmount");}
 
   render() {
-    console.log("render");   
-    const element = (data, index) => (
-      <TouchableOpacity onPress={() => this._alertIndex(data, index)}>
+    //console.log("render");   
+    const element = (code, index) => (
+      <TouchableOpacity onPress={() => this._alertIndex(code, index)}>
         <View style={styles.btn}>
           <Text style={styles.btnText}>Graph</Text>
         </View>
       </TouchableOpacity>
     );
 
-    let temp = [];     
+    let code = [];     
     return (
       <View style={styles.container}>
         <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
@@ -80,10 +84,10 @@ export default class StockScreen extends Component {
                 {           
                   rowData.map(function(cellData, cellIndex) {                    
                     if (cellIndex === 1){
-                      console.log(cellData);
-                      temp.push(cellData);
+                      //console.log(cellData);
+                      code.push(cellData);
                     }
-                    return <Cell key={cellIndex} data={cellIndex === 5 ? element(temp[index], index) : cellData} textStyle={styles.text}/>
+                    return <Cell key={cellIndex} data={cellIndex === 5 ? element(code[index], index) : cellData} textStyle={styles.text}/>
                   })
                 }
                 </TableWrapper>
@@ -104,6 +108,6 @@ const styles = StyleSheet.create({
   text: { textAlign: 'center', fontWeight: '100' },
   dataWrapper: { marginTop: -1 },
   row: { flexDirection: 'row',height: 40, backgroundColor: '#E7E6E1' },
-  btn: { width: 58, height: 25, backgroundColor: '#78B7BB',  borderRadius: 2 },
+  btn: { justifyContent: 'center', alignItems: 'center',  width: '100%', height: '100%', backgroundColor: '#78B7BB',  borderRadius: 2 },
   btnText: { alignSelf: 'center', color: '#fff' }
 });
