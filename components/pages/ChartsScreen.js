@@ -7,42 +7,46 @@ import { Divider } from "react-native-elements";
 //import { ScrollView } from "react-native-gesture-handler";
 import StockChart from "../Home/StockChart";
 
-let code = null;
-let company = null;
+
 export default function ChartsScreen({route}) {
-    const [ibmData, setIBMData] = useState([]);
-    const [stockNews, setStockNews] = useState([]);
+    //const [stockNews, setStockNews] = useState([]);
     const [stockInfo, setStockInfo] = useState([]);
     const [stockData, setStockData] = useState([]);
-  
-    // check something from other page
-    if (route.params){
-        code = route.params;
+
+    let company = "IBM";
+      // check something from other page
+      if (route.params){
+        let code = route.params;
         company = code.data;
-    }       
-    else
-        company = "IBM";
+    }
 
     const initialLoading = async () => {
         try {
             const stockRes = await axios.get(
-                `https://sandbox.iexapis.com/stable/stock/${company}/batch?types=quote,news,chart&range=6m&last=10&token=Tsk_9b260400520a4d23abfe1ef6cb0d3feb`        
+                //`https://cloud.iexapis.com/stable/stock/aapl/batch?types=quote,news,chart&range=6m&last=10&token=pk_b035331efd5e430a9287e5e92742b180`
+                `https://sandbox.iexapis.com/stable/stock/${company}/batch?types=quote,news,chart&range=6m&last=10&token=Tsk_9b260400520a4d23abfe1ef6cb0d3feb`
+                //`https://sandbox.iexapis.com/stable/stock/${company}/batch?types=quote,news,chart&range=6m&last=10&token=Tsk_9b260400520a4d23abfe1ef6cb0d3feb`        
             );
 
-            //setStockInfo(stockRes.data.quote);
-            //setStockNews(stockRes.data.news);
+            setStockInfo(stockRes.data.quote);
+            //console.log(stockRes.data.quote);
             setStockData(stockRes.data.chart);
+            console.log("XXXXXXX");
         }
         catch (error) {
             console.log(error);
         }
     };
 
-    initialLoading();      
+    useEffect(() => {
+        //setInterval(() => {
+            initialLoading();    
+        //}, 4000);  
+    }, [route]);
+
     return (
         <View style={styles.container}>     
-            <StockChart name={company.toUpperCase()} data={stockData} />
-            <Divider style={{ backgroundColor: "gray", height: 0.5 }} />
+            <StockChart name={company.toUpperCase()} data={stockData} info={stockInfo}/>
         </View>
     );
 }
