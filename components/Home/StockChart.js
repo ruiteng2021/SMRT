@@ -46,7 +46,7 @@ export default class StockChart extends Component {
               sum += dataClose[i - j];
           }
           //console.log(sum);
-          result.push(sum / dayCount);
+          result.push((sum / dayCount).toFixed(2));
       }
       
       return result;

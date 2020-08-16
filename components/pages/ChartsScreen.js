@@ -13,7 +13,7 @@ export default function ChartsScreen({route}) {
     const [stockInfo, setStockInfo] = useState([]);
     const [stockData, setStockData] = useState([]);
 
-    let company = "IBM";
+    let company = "AAPL";
       // check something from other page
       if (route.params){
         let code = route.params;
