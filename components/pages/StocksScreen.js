@@ -19,6 +19,10 @@ export default class StockScreen extends Component {
  
   componentDidMount() {
     console.log("componentDidMount");
+    if (this.props.route.params){
+      const { userName } = this.props.route.params;
+      console.log("YYYYY"+ this.props.route.params + "YYYYY");
+    }
     const self = this;
 
     // read data from datebase
@@ -70,33 +74,40 @@ export default class StockScreen extends Component {
     );
 
     let code = [];     
-    return (
-      <View style={styles.container}>
-        <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-          <Row data={this.state.tableHead} style={styles.header} textStyle={styles.text}/>
-        </Table>
-        <ScrollView style={styles.dataWrapper}>
+    if (this.props.route.params){
+      return (
+        <View style={styles.container}>
           <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
-            {
-              this.state.data.map((rowData, index) => (
-                
-                <TableWrapper key={index} style={[styles.row, index%2 && {backgroundColor: '#F7F6E7'}]}>
-                {           
-                  rowData.map(function(cellData, cellIndex) {                    
-                    if (cellIndex === 1){
-                      //console.log(cellData);
-                      code.push(cellData);
-                    }
-                    return <Cell key={cellIndex} data={cellIndex === 5 ? element(code[index], index) : cellData} textStyle={styles.text}/>
-                  })
-                }
-                </TableWrapper>
-              ))
-            }
+            <Row data={this.state.tableHead} style={styles.header} textStyle={styles.text}/>
           </Table>
-        </ScrollView>
-      </View>
-    )
+          <ScrollView style={styles.dataWrapper}>
+            <Table borderStyle={{borderWidth: 1, borderColor: '#C1C0B9'}}>
+              {
+                this.state.data.map((rowData, index) => (
+                  
+                  <TableWrapper key={index} style={[styles.row, index%2 && {backgroundColor: '#F7F6E7'}]}>
+                  {           
+                    rowData.map(function(cellData, cellIndex) {                    
+                      if (cellIndex === 1){
+                        //console.log(cellData);
+                        code.push(cellData);
+                      }
+                      return <Cell key={cellIndex} data={cellIndex === 5 ? element(code[index], index) : cellData} textStyle={styles.text}/>
+                    })
+                  }
+                  </TableWrapper>
+                ))
+              }
+            </Table>
+          </ScrollView>
+        </View>
+      )
+
+    }
+    else{
+      return null;
+    }
+
     
   }
 }

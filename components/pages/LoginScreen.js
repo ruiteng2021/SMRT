@@ -71,7 +71,7 @@ export default class LoginScreen extends Component {
                                 );
                             }
                             else {
-                                stocks.navigate('Stocks');
+                                stocks.navigate('Stocks',{userName: user_name});
                                 console.log("Show stock items!");
                             }                          
                         }

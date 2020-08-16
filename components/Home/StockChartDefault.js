@@ -5,35 +5,18 @@ import { ECharts } from "react-native-echarts-wrapper";
 export default class StockChart extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      stockInfo : {
-        "latestPrice": " ",
-        "change": " ",
-        "latestTime": " ",
-        "changePercent": " ",
-        "high": " ",
-        "low": " ",
-        "open": " ",
-        "close": " ",
-        "volume": " ",
-        "avgTotalVolume": " ",
-        "peRatio": " ",
-        "latestPrice": " ",
-        "delayedPrice": " ",
-        "extendedPrice": " "
-      }
-    }
   }
-
+  
+  /*
   onRef = ref => {
     if (ref) {
       this.chart = ref;
       //console.log(this.chart.getOption());
     }
   };    
-
-  triggeredFunction = () => {
-    function calculateMA(dayCount, dataClose) {
+  */
+  //initChart = () => {
+    calculateMA(dayCount, dataClose) {
       let result = [];
       //console.log(dataClose.length);
       for (let i = 0, len = dataClose.length; i < len; i++) {
@@ -52,11 +35,13 @@ export default class StockChart extends Component {
       return result;
     }
 
+    render() { 
     //let stockData = data.slice(-30);
     let data = this.props.data;
     let name = this.props.name + "("+this.props.info.companyName+")";
     let stockData = this.props.data;
-    this.setState({stockInfo: this.props.info});
+
+    //this.setState({stockInfo: this.props.info});
 
     let dates = [];
     let values = [];
@@ -164,7 +149,7 @@ export default class StockChart extends Component {
         {
           name: 'MA5',
           type: 'line',
-          data: calculateMA(5, dataClose),
+          data: this.calculateMA(5, dataClose),
           smooth: true,
           lineStyle: {
               opacity: 0.5,
@@ -175,7 +160,7 @@ export default class StockChart extends Component {
         {
           name: 'MA10',
           type: 'line',
-          data: calculateMA(10, dataClose),
+          data:  this.calculateMA(10, dataClose),
           smooth: true,
           lineStyle: {
               opacity: 0.5,
@@ -186,7 +171,7 @@ export default class StockChart extends Component {
         {
           name: 'MA20',
           type: 'line',
-          data: calculateMA(20, dataClose),
+          data:  this.calculateMA(20, dataClose),
           smooth: true,
           lineStyle: {
               opacity: 0.5
@@ -195,26 +180,28 @@ export default class StockChart extends Component {
       ]
     };
 
-    this.chart.setOption(option);
-    this.chart.getOption(option => {});
+    //this.chart.setOption(option);
+    //this.chart.getOption(option => {});
     //console.log(this);
 
-  }
+  //}
 
-  render() {    
+  
+    //console.log("this");
+    //this.initChart();
     return (
       <View style={styles.chartContainer}>
-        <Button title="Update Chart" onPress={this.triggeredFunction} />
+        {/*<Button title="Update Chart" onPress={this.initChart} />*/}
         <View style={{flex: 1, flexDirection: 'row', flexWrap: 'wrap', backgroundColor:'#E5E7E7', padding:5}}>
-          <Text style={[styles.price, (parseFloat(this.state.stockInfo["change"]) > 0 ? styles.price : styles.priceBlue)]}> {parseFloat(this.state.stockInfo["latestPrice"]) > 0 ? "$"+this.state.stockInfo["latestPrice"] : this.state.stockInfo["latestPrice"]}</Text> 
-          <Text style={[styles.priceChange, (parseFloat(this.state.stockInfo["change"]) > 0 ? styles.priceChange : styles.priceChangeBlue)]}>{parseFloat(this.state.stockInfo["change"]) > 0 ? "+" + this.state.stockInfo["change"] : this.state.stockInfo["change"]}</Text> 
-          <Text style={styles.lastTrade}> Last Trade: {this.state.stockInfo["latestTime"]}</Text> 
-          <Text style={[styles.latestPricePerc, (parseFloat(this.state.stockInfo["change"]) > 0 ? styles.latestPricePerc : styles.latestPricePercBlue)]}> {parseFloat(this.state.stockInfo["changePercent"]) > 0 ? "+" + this.state.stockInfo["changePercent"]+"%" : this.state.stockInfo["changePercent"]+"%" }</Text> 
+          <Text style={[styles.price, (parseFloat(this.props.info["change"]) > 0 ? styles.price : styles.priceBlue)]}> {parseFloat(this.props.info["latestPrice"]) > 0 ? "$"+this.props.info["latestPrice"] : this.props.info["latestPrice"]}</Text> 
+          <Text style={[styles.priceChange, (parseFloat(this.props.info["change"]) > 0 ? styles.priceChange : styles.priceChangeBlue)]}>{parseFloat(this.props.info["change"]) > 0 ? "+" + this.props.info["change"] : this.props.info["change"]}</Text> 
+          <Text style={styles.lastTrade}> Last Trade: {this.props.info["latestTime"]}</Text> 
+          <Text style={[styles.latestPricePerc, (parseFloat(this.props.info["change"]) > 0 ? styles.latestPricePerc : styles.latestPricePercBlue)]}> {parseFloat(this.props.info["changePercent"]) > 0 ? "+" + this.props.info["changePercent"]+"%" : this.props.info["changePercent"]+"%" }</Text> 
         </View>
         <View style={{flex: 6}}>
           <ECharts
-            option={{}}
-            ref={this.onRef}
+            option={option}
+            //ref={this.onRef}
             backgroundColor="#E5E7E7"
           />
         </View>
@@ -222,34 +209,34 @@ export default class StockChart extends Component {
         <View style={{flex: 3, flexDirection: 'row', flexWrap: 'wrap', padding:5, backgroundColor:'#E5E7E7'}}>
           
           <Text style={styles.infoContainer}> High</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["high"]}   </Text> 
+          <Text style={styles.dataContainer}>{this.props.info["high"]}   </Text> 
           <Text style={styles.infoContainer}>   52wk High</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["week52High"]}</Text> 
+          <Text style={styles.dataContainer}>{this.props.info["week52High"]}</Text> 
 
           <Text style={styles.infoContainer}> Low</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["low"]}   </Text> 
+          <Text style={styles.dataContainer}>{this.props.info["low"]}   </Text> 
           <Text style={styles.infoContainer}>   52wk Low</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["week52Low"]}</Text> 
+          <Text style={styles.dataContainer}>{this.props.info["week52Low"]}</Text> 
 
           <Text style={styles.infoContainer}> Open</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["open"]}   </Text> 
+          <Text style={styles.dataContainer}>{this.props.info["open"]}   </Text> 
           <Text style={styles.infoContainer}>   Close</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["close"]}</Text> 
+          <Text style={styles.dataContainer}>{this.props.info["close"]}</Text> 
 
           <Text style={styles.infoContainer}> Volume</Text>   
-          <Text style={styles.dataContainer}>{parseInt(this.state.stockInfo["volume"]) > 0 ? this.state.stockInfo["volume"]+"M" : this.state.stockInfo["volume"]}   </Text> 
+          <Text style={styles.dataContainer}>{parseInt(this.props.info["volume"]) > 0 ? this.props.info["volume"]+"M" : this.props.info["volume"]}   </Text> 
           <Text style={styles.infoContainer}>   Total Vol</Text>           
-          <Text style={styles.dataContainer}>{parseInt(this.state.stockInfo["avgTotalVolume"]) > 0 ? this.state.stockInfo["avgTotalVolume"]+"M" : this.state.stockInfo["avgTotalVolume"]}</Text>
+          <Text style={styles.dataContainer}>{parseInt(this.props.info["avgTotalVolume"]) > 0 ? this.props.info["avgTotalVolume"]+"M" : this.props.info["avgTotalVolume"]}</Text>
 
           <Text style={styles.infoContainer}> P/E</Text>    
-          <Text style={styles.dataContainer}>{this.state.stockInfo["peRatio"]}   </Text> 
+          <Text style={styles.dataContainer}>{this.props.info["peRatio"]}   </Text> 
           <Text style={styles.infoContainer}>   Last Price</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["latestPrice"]}</Text> 
+          <Text style={styles.dataContainer}>{this.props.info["latestPrice"]}</Text> 
 
           <Text style={styles.infoContainer}> Delayed price</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["delayedPrice"]}   </Text> 
+          <Text style={styles.dataContainer}>{this.props.info["delayedPrice"]}   </Text> 
           <Text style={styles.infoContainer}>   Extened Price</Text>           
-          <Text style={styles.dataContainer}>{this.state.stockInfo["extendedPrice"]}</Text> 
+          <Text style={styles.dataContainer}>{this.props.info["extendedPrice"]}</Text> 
           
         </View>
       

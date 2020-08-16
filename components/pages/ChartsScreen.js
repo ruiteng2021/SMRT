@@ -6,6 +6,7 @@ import { StyleSheet, View } from "react-native";
 import { Divider } from "react-native-elements";
 //import { ScrollView } from "react-native-gesture-handler";
 import StockChart from "../Home/StockChart";
+import StockChartDefault from "../Home/StockChartDefault";
 
 
 export default function ChartsScreen({route}) {
@@ -44,11 +45,20 @@ export default function ChartsScreen({route}) {
         //}, 4000);  
     }, [route]);
 
-    return (
-        <View style={styles.container}>     
-            <StockChart name={company.toUpperCase()} data={stockData} info={stockInfo}/>
-        </View>
-    );
+    if (company == "AAPL") {
+        return (
+            <View style={styles.container}>     
+                <StockChartDefault name={company.toUpperCase()} data={stockData} info={stockInfo}/>
+            </View>
+        );
+    } 
+    else {
+        return (
+            <View style={styles.container}>     
+                <StockChart name={company.toUpperCase()} data={stockData} info={stockInfo}/>
+            </View>
+        );
+    } 
 }
 
 const styles = StyleSheet.create({
