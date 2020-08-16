@@ -1,165 +1,36 @@
-/*
-import React, { useState, useEffect } from 'react';
-import { CanvasJSChart } from 'canvasjs-react-charts';
-import { getDailyChartForSymbol } from './ApiConnector';
 
-const Chart = () => {
-    const [stockData, setStockData] = useState([]);
+import React from 'react';
+import { StyleSheet,Text, View } from 'react-native';
 
-    // Fetch daily stock chart for TSLA when the component mounts
-    useEffect(() => {
-        const fetchStockData = async () => {
-            const result = await getDailyChartForSymbol('TSLA');
-
-            setStockData(formatStockData(result.data['Time Series (Daily)']));
-        };
-
-        fetchStockData();
-    }, []);
+const AboutScreen = () => {
 
     return (
-        <CanvasJSChart
-            options={ {
-                axisY: {
-                    // Minimum value is 10% less than the lowest price in the dataset
-                    minimum: Math.min(...stockData.map(data => data.low)) / 1.1,
-                    // Minimum value is 10% more than the highest price in the dataset
-                    maximum: Math.max(...stockData.map(data => data.high)) * 1.1,
-                    crosshair: {
-                        enabled: true,
-                        snapToDataPoint: true
-                    }
-                },
-                axisX: {
-                    crosshair: {
-                        enabled: true,
-                        snapToDataPoint: true
-                    },
-                    scaleBreaks: {
-                        spacing: 0,
-                        fillOpacity: 0,
-                        lineThickness: 0,
-                        customBreaks: stockData.reduce((breaks, value, index, array) => {
-                            // Just return on the first iteration
-                            // Since there is no previous data point
-                            if (index === 0) return breaks;
+        <View style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'skyblue',
+            
+             }}>
+         
+    
+      <Text>SMRT-Stock Market Real-time !A simple app to display the stock information.
 
-                            // Time in UNIX for current and previous data points
-                            const currentDataPointUnix = Number(new Date(value.date));
-                            const previousDataPointUnix = Number(new Date(array[index - 1].date));
+ 
 
-                            // One day converted to milliseconds
-                            const oneDayInMs = 86400000;
 
-                            // Difference between the current and previous data points
-                            // In milliseconds
-                            const difference = previousDataPointUnix - currentDataPointUnix;
+SMRT  app will show stock information ,what stock markets are there ,what are the top 10 stock markets?
+will also display information about current and what are the different rules in stock market.will also
+show comparison or graph about the top 10 markets.</Text>
 
-                            return difference === oneDayInMs
-                                // Difference is 1 day, no scale break is needed
-                                ? breaks
-                                // Difference is more than 1 day, need to create
-                                // A new scale break
-                                : [
-                                    ...breaks,
-                                    {
-                                        startValue: currentDataPointUnix,
-                                        endValue: previousDataPointUnix - oneDayInMs
-                                    }
-                                ]
-                        }, [])
-                    }
-                },
-                data: [
-                    {
-                        type: 'candlestick',
-                        dataPoints: stockData.map(stockData => ({
-                            x: new Date(stockData.date),
-                            // The OHLC for the data point
-                            // The order is IMPORTANT!
-                            y: [
-                                stockData.open,
-                                stockData.high,
-                                stockData.low,
-                                stockData.close
-                            ]
-                        }))
-                    }
-                ]
-            } }
-        />
-    );
-};
-
-function formatStockData(stockData) {
-    // Convert stockData from an object to an array
-    return Object.entries(stockData).map(entries => {
-        const [date, priceData] = entries;
-
-        return {
-            date,
-            open: Number(priceData['1. open']),
-            high: Number(priceData['2. high']),
-            low: Number(priceData['3. low']),
-            close: Number(priceData['4. close'])
-        }
-    });
+<Text>
+    Thankyou for choosing this app.We appreciate your comments always,please send the feature request or 
+    request or report bugsdirectly to the developer instead od posting on the market.we will do our best to satisfy
+    your request.
+</Text>
+    </View>
+  );
 }
 
-export default Chart;
-*/
+export default AboutScreen;
 
-
-/*
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-
-
-export default class AboutScreen extends Component {
-    render() {
-        return (
-            <View>
-                <Text>About</Text>
-            </View>
-        )
-    } // render()
-} // class
-*/
-
-import React, { Component } from "react";
-import { StyleSheet, View } from "react-native";
-import { ECharts } from "react-native-echarts-wrapper";
-
-export default function App () {
-  const option = {
-    xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    },
-    yAxis: {
-      type: "value"
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: "line"
-      }
-    ]
-  };
-
-    return (
-      <View style={styles.chartContainer}>
-        <ECharts
-          option={option}
-          backgroundColor="rgba(93, 169, 81, 0.3)"
-        />
-      </View>
-    );
-}
-
-const styles = StyleSheet.create({
-  chartContainer: {
-    flex: 1
-  }
-});
-//still coming soon
