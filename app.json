@@ -20,7 +20,7 @@
     },
     "android": {
       "package": "com.trios.smrt",
-      "versionCode": 1
+      "versionCode": 2
     }
   }
 }

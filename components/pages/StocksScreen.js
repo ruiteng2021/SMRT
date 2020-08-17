@@ -109,7 +109,7 @@ export default class StockScreen extends Component {
       return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30}}>        
           <Text>
-              Under Construction, please enter Username: test, and Password: test to see default page.
+              Under Construction, please login with Username: test, and Password: test to see default page.
           </Text>
         </View>
       );
