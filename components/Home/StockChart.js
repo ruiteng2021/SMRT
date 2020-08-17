@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Button, Text, ScrollView  } from "react-native";
+import { StyleSheet, View, Button, Text, ScrollView, ToastAndroid  } from "react-native";
 import { ECharts } from "react-native-echarts-wrapper";
 
 export default class StockChart extends Component {
@@ -202,6 +202,13 @@ export default class StockChart extends Component {
   }
 
   render() {    
+    
+    ToastAndroid.showWithGravity(
+      "press UPDATE CHART please",
+      ToastAndroid.SHORT,
+      ToastAndroid.CENTER
+    );
+
     return (
       <View style={styles.chartContainer}>
         <Button title="Update Chart" onPress={this.triggeredFunction} />
