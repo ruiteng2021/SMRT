@@ -105,10 +105,15 @@ export default class StockScreen extends Component {
 
     }
     else{
-      return null;
-    }
-
-    
+      
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', padding: 30}}>        
+          <Text>
+              Under Construction, please enter Username: test, and Password: test to see default page.
+          </Text>
+        </View>
+      );
+    }    
   }
 }
  

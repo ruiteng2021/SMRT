@@ -14,16 +14,14 @@ const AboutScreen = () => {
         }}>        
     
         <Text>
-            SMRT-Stock Market Real-time !A simple app to display the stock information.
-            SMRT  app will show stock information ,what stock markets are there ,what are the top 10 stock markets?
-            will also display information about current and what are the different rules in stock market.will also
-            show comparison or graph about the top 10 markets.
+            SMRT-Stock Market Real-time! A simple app to display your stock information.
+            SMRT app will show your stock information, what stocks you have.  It will also display 
+            information about prices, and they are presented with candle stick graph.
         </Text>
 
         <Text>
-            Thankyou for choosing this app.We appreciate your comments always,please send the feature request or 
-            request or report bugsdirectly to the developer instead od posting on the market.we will do our best to satisfy
-            your request.
+            Thankyou for choosing this app. We appreciate your comments always, please send the feature request or 
+            request or report bugs directly to the developer. we will do our best to satisfy your request.
         </Text>
     </View>
   );
